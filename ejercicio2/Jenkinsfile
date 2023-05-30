@@ -2,24 +2,33 @@ pipeline {
     agent any
 
     stages {
-        stage('Mostrar usuario') {
+        stage('INFO') {
             steps {
-                echo "El usuario que inicio el trabajo es ${env.USERNAME}"
+                sccript{
+                    def dia = new Date().getDay()
+                    def map = [1: "Lunes", 2: "Martes", 3: "Miercoles", 4:"Jueves", 5:"Viernes", 6:"Sabado", 7: "Domingo"]                
+                    println dia                
+                    println map
+                }
             }
         }
-    }
-    stage("Dias de la semana")
-    {
-        steps
-        {       
-            script
-            {
-                def dia = new Date().getDay()
-                def map = [1: "Lunes", 2: "Martes", 3: "Miercoles", 4:"Jueves", 5:"Viernes", 6:"Sabado", 7: "Domingo"]                
-                println dia                
-                println map
+        stage("Dia de la semana")
+        {
+            steps
+            {       
+                script
+                {
+                    def dia = new Date().getDay()
+                    def map = [1: "Lunes", 2: "Martes", 3: "Miercoles", 4:"Jueves", 5:"Viernes", 6:"Sabado", 7: "Domingo"]                
+                    if(dia==3){
+                        echo "Hoy " +  map[dia] +" es un día soleado"
+                    }else if(dia==2){
+                        echo "El usuario que inicio el trabajo es ${env.USERNAME}"
+                    }else if(dia==4){
+                        git branch: "master", url: "https://github.com/pmavis/CICD_Jenkins.git"
+                    }
+                }
             }
         }
-        
     }
 }
