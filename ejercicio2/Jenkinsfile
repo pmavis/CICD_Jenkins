@@ -10,6 +10,8 @@ pipeline {
                     println dia                
                     println map
                     echo  "DIA: " + map[dia]
+                    echo "USER: " + env.BUILD_USER_ID
+                    git branch: "master", url: "https://github.com/pmavis/CICD_Jenkins.git"
                 }
             }
         }
@@ -24,7 +26,7 @@ pipeline {
                     if(dia==3){
                         echo "Hoy " +  map[dia] +" es un día soleado"
                     }else if(dia==2){
-                        echo "El usuario que inicio el trabajo es ${env.USERNAME}"
+                        echo "El usuario que inicio el trabajo es " + env.BUILD_USER_ID
                     }else if(dia==4){
                         git branch: "master", url: "https://github.com/pmavis/CICD_Jenkins.git"
                     }
