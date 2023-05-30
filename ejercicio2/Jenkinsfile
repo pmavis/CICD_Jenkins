@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Mostrar usuario') {
+            steps {
+                echo "El usuario que inicio el trabajo es ${env.USERNAME}"
+            }
+        }
+    }
+}
